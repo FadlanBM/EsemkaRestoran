@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 
 data class ItemListcart(
     val id:String,
+    val name:String,
     val price:String,
-    val count:Int,
     val image:Bitmap
 )

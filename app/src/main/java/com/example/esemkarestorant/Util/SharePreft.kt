@@ -2,6 +2,7 @@ package com.example.esemkarestorant.Util
 
 import android.content.Context
 import android.content.SharedPreferences
+import org.json.JSONArray
 
 class SharePreft constructor(context: Context) {
     companion object{
@@ -31,9 +32,16 @@ class SharePreft constructor(context: Context) {
     fun getToken():String?{
         return sharePreft.getString(preftToken,null)
     }
+    fun setidlist(idlist:String){
+        sharePreft.edit().putString(idListTable,idlist).apply()
+    }
+
+    fun getidlist():String?{
+        return sharePreft.getString(idCarts,null)
+    }
 
     fun getIdList():String?{
-        return sharePreft.getString(idListTable,null)
+        return sharePreft.getString(idCarts,null)
     }
 
     fun saveidcart(key: String, list: List<String>) {
@@ -54,4 +62,6 @@ class SharePreft constructor(context: Context) {
         val joinedList = sharePreft.getString(key, null)
         return joinedList?.split("|") ?: emptyList() // Use the same separator you used when saving
     }
+
+
 }

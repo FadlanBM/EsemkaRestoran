@@ -12,6 +12,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.example.esemkarestorant.Util.BASEAPI
 import com.example.esemkarestorant.Util.SharePreft
+import com.example.esemkarestorant.Util.SharePreft_Char
 import com.example.esemkarestorant.databinding.ActivityDetailBinding
 import org.json.JSONObject
 import java.io.InputStreamReader
@@ -62,9 +63,12 @@ class DetailActivity : AppCompatActivity() {
         binding.btnAddToCart.setOnClickListener {
             val listId = listOf(id!!)
             SharePreft.getIntance(this).saveidcart("idCarts", listId)
+            val list= listOf(id)
+            SharePreft_Char(this).saveData(id!!)
 
             val listCount= listOf(currentResult.toString())
             SharePreft.getIntance(this).savecountcart("countCart",listCount)
+            SharePreft_Char(this).saveDataCount(currentResult.toString())
 
             val intent = Intent(this, MainMenuActivity::class.java)
             intent.putExtra("FROM_DETAIL", "FROM_DETAIL")
