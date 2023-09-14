@@ -16,11 +16,15 @@
         android:theme="@style/Theme.EsemkaRestorant"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
         <activity
-            android:name=".DetailActivity"
+            android:name=".MainListTableAdminActivity"
             android:exported="false" />
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".LoginCodeTableActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Login_Admin"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +32,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".DetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainMenuActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

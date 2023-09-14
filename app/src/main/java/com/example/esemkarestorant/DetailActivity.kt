@@ -52,6 +52,7 @@ class DetailActivity : AppCompatActivity() {
 
         getResultZero.observe(this){
             binding.btnMinCart.isEnabled = it != true
+            binding.btnAddToCart.isEnabled=it!=true
         }
 
         binding.btnAddCart.setOnClickListener {
@@ -67,7 +68,6 @@ class DetailActivity : AppCompatActivity() {
             SharePreft_Char(this).saveData(id!!)
 
             val listCount= listOf(currentResult.toString())
-            SharePreft.getIntance(this).savecountcart("countCart",listCount)
             SharePreft_Char(this).saveDataCount(currentResult.toString())
 
             val intent = Intent(this, MainMenuActivity::class.java)

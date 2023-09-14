@@ -16,9 +16,40 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/btn_cart_clear"
         tools:listitem="@layout/adapterlistcart"
         android:id="@+id/recyleView_cart"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_above="@id/linerButtom"
         />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:id="@+id/linerButtom">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp. 100.0000"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="5dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:id="@+id/lb_totalPrice_cart"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="end"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Orders"
+            android:id="@+id/btn_orders_cart"
+            />
+    </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

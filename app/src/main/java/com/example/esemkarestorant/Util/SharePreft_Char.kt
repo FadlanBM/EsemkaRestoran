@@ -56,6 +56,26 @@ class SharePreft_Char(context: Context) {
         editor2.putString("my_count_key", jsonArray.toString())
         editor2.apply()
     }
+    fun updateDataCount(oldData: String,newData: String) {
+        val existingData = sharedPreferences.getString("my_count_key", null)
+
+        if (existingData != null) {
+            val jsonArray = JSONArray(existingData)
+
+            // Cari indeks elemen yang ingin Anda update
+            for (i in 0 until jsonArray.length()) {
+                if (jsonArray.getString(i) == oldData) {
+                    // Update data di indeks tersebut dengan newData
+                    jsonArray.put(i, newData)
+                    break // Keluar dari loop setelah data diupdate
+                }
+            }
+
+            // Simpan JSON Array yang telah diubah kembali ke Shared Preferences
+            editor2.putString("my_count_key", jsonArray.toString())
+            editor2.apply()
+        }
+    }
 
     fun getDataCount(): List<String> {
         val existingData = sharedPreferences.getString("my_count_key", null)

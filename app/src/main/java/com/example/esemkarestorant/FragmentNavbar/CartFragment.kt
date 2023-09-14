@@ -47,12 +47,13 @@ class CartFragment : Fragment() {
         val view=inflater.inflate(R.layout.fragment_cart, container, false)
         var context=requireContext()
         recyleView=view.findViewById(R.id.recyleView_cart)
-        adapterCart=AdapterRecyleCart(context, emptyList())
+        adapterCart=AdapterRecyleCart(context, emptyList(),viewLifecycleOwner)
         recyleView.adapter=adapterCart
 
         val button=view.findViewById<Button>(R.id.btn_cart_clear)
         button.setOnClickListener {
             SharePreft_Char(context).deleteData()
+            getCount(context).execute()
         }
         getCount(context).execute()
         return view
@@ -77,7 +78,6 @@ class CartFragment : Fragment() {
         override fun doInBackground(vararg params: String?): List<ItemListcart> {
             var datalist= mutableListOf<ItemListcart>()
             val id=SharePreft_Char(requireContext()).getData()
-            val count=SharePreft_Char(requireContext()).getDataCount()
             var httpURLConnection:HttpURLConnection?=null
             var httpimage:HttpURLConnection?=null
             /*for (datacount in count){
@@ -113,7 +113,15 @@ class CartFragment : Fragment() {
                     val id=jsonObject.getString("menuId")
                     var name=jsonObject.getString("name")
                     val price=jsonObject.getInt("price").toString()
-                    datalist.add(ItemListcart(id,name,price,bitmap))
+                    datalist.add(ItemListcart(id,name,price,"0",bitmap))
+            }
+            var count=SharePreft_Char(requireContext()).getDataCount()
+            count.mapIndexed { indexdata,count ->
+                datalist.mapIndexed { indexdatalist, itemListcart ->
+                    if (indexdata==indexdatalist){
+                        itemListcart.count=count
+                    }
+                }
             }
             return datalist
         }
@@ -121,7 +129,7 @@ class CartFragment : Fragment() {
         override fun onPostExecute(result: List<ItemListcart>?) {
             super.onPostExecute(result)
             Log.e("resul",result.toString())
-            var adapterCartlist= AdapterRecyleCart(context,result!!)
+            var adapterCartlist= AdapterRecyleCart(context,result!!,viewLifecycleOwner)
             recyleView.adapter=adapterCartlist
 
         }
