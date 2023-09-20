@@ -1,10 +1,16 @@
 package com.example.esemkarestorant
 
+import android.R
+import android.app.Dialog
 import android.content.Context
 import android.os.AsyncTask
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.esemkarestorant.AdapterRecycleView.AdpaterListTable
 import com.example.esemkarestorant.ItemData.ItemTableAdmin
@@ -13,10 +19,9 @@ import com.example.esemkarestorant.Util.SharePreft
 import com.example.esemkarestorant.databinding.ActivityMainListTableAdminBinding
 import org.json.JSONArray
 import java.io.InputStreamReader
-import java.lang.Exception
 import java.net.HttpURLConnection
 import java.net.URL
-import kotlin.math.log
+
 
 class MainListTableAdminActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainListTableAdminBinding
@@ -30,6 +35,31 @@ class MainListTableAdminActivity : AppCompatActivity() {
         itemAdapter=AdpaterListTable(this, emptyList())
         recyclerView.adapter=itemAdapter
         getDataTable(this).execute()
+
+        binding.btnAddTableAdmin.setOnClickListener {
+            val dialog = Dialog(this)
+            dialog.setTitle("Title")
+            dialog.setContentView(com.example.esemkarestorant.R.layout.adapter_modal_addtable)
+            val etInputCode = dialog.findViewById<View>(com.example.esemkarestorant.R.id.etInputCode)
+            val btnOpenTable = dialog.findViewById<View>(com.example.esemkarestorant.R.id.btnOpenTable)
+            val btnCancel = dialog.findViewById<View>(com.example.esemkarestorant.R.id.btnCancel)
+//            val dataAdapter: ArrayAdapter<String> = ArrayAdapter<Any?>(
+//                this,
+//                R.layout.simple_spinner_item, providersList
+//            )
+//
+//            dataAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
+//            checkInProviders.adapter = dataAdapter
+            btnOpenTable.setOnClickListener {
+
+                Toast.makeText(this, "Berhasil Open Table!", Toast.LENGTH_SHORT).show()
+            }
+            btnCancel.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            dialog.show()
+        }
     }
 
     private inner class getDataTable(val context: Context):AsyncTask<String,String,String>(){
@@ -37,6 +67,7 @@ class MainListTableAdminActivity : AppCompatActivity() {
             var result=""
             var token="bearer ${SharePreft.getIntance(context).getToken()}"
             Log.e("Token","token $token")
+
             var httpURLConnection:HttpURLConnection?=null
             try {
                 var url=URL(BASEAPI.BaseApi+"Api/Table")

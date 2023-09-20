@@ -40,23 +40,26 @@ class AdapterRecyleCart(val context: Context,val items:List<ItemListcart>,val li
         holder.count.text=item.count
         holder.btnAdd.setOnClickListener {
             var oldCount=item.count
-            addCount()
+            addCount(position)
             readresuld.observe(lifecycleOwner){
                 item.count=it.toString()
             }
-            SharePreft_Char(context).updateDataCount(oldCount,item.count)
+            SharePreft_Char(context).updateDataCount(position,item.count)
             Log.e("oldCount","data ${oldCount}")
             Log.e("oldCount","data ${item.count}")
             holder.count.text=item.count
+            holder.btnMinus.isEnabled = item.count != "0"
         }
         holder.btnMinus.setOnClickListener {
             var oldCount=item.count
-            minusCount()
+            minusCount(position)
             readresuld.observe(lifecycleOwner){
                 item.count=it.toString()
+
             }
-            SharePreft_Char(context).updateDataCount(oldCount,item.count)
+            SharePreft_Char(context).updateDataCount(position,item.count)
             holder.count.text=item.count
+            holder.btnMinus.isEnabled = item.count != "0"
         }
 
     }
@@ -72,11 +75,13 @@ class AdapterRecyleCart(val context: Context,val items:List<ItemListcart>,val li
         val btnMinus:Button=view.findViewById(R.id.btn_cart_min)
 
     }
-    fun addCount(){
-        result.value=(result.value)?.plus(1)
+    fun addCount(potition:Int){
+        val oldValue=SharePreft_Char(context).getDataCount()[potition].toInt()
+        result.value=(oldValue)?.plus(1)
     }
-    fun  minusCount(){
-        result.value=(result.value)?.minus(1)
+    fun  minusCount(potition: Int){
+        val oldValue=SharePreft_Char(context).getDataCount()[potition].toInt()
+        result.value=(oldValue)?.minus(1)
     }
 
 }

@@ -16,7 +16,9 @@
         android:theme="@style/Theme.EsemkaRestorant"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".DetailTableActivity"
+            android:exported="false" />
         <activity
             android:name=".MainListTableAdminActivity"
             android:exported="false" />
