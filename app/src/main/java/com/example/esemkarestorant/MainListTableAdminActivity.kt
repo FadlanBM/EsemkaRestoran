@@ -38,9 +38,7 @@ class MainListTableAdminActivity : AppCompatActivity() {
 
         binding.btnAddTableAdmin.setOnClickListener {
             val dialog = Dialog(this)
-            dialog.setTitle("Title")
             dialog.setContentView(com.example.esemkarestorant.R.layout.adapter_modal_addtable)
-            val etInputCode = dialog.findViewById<View>(com.example.esemkarestorant.R.id.etInputCode)
             val btnOpenTable = dialog.findViewById<View>(com.example.esemkarestorant.R.id.btnOpenTable)
             val btnCancel = dialog.findViewById<View>(com.example.esemkarestorant.R.id.btnCancel)
 //            val dataAdapter: ArrayAdapter<String> = ArrayAdapter<Any?>(

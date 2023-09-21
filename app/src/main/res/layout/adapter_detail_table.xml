@@ -51,7 +51,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
                 tools:listitem="@layout/adapter_list_pesanan"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:id="@+id/recyleViewTotalCart"/>
         </LinearLayout>
 
 

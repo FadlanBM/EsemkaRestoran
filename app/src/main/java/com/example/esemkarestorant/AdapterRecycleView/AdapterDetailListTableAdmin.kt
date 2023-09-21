@@ -26,7 +26,10 @@ class AdapterDetailListTableAdmin(val context: Context,val items:List<ItemDetail
     }
 
     override fun onBindViewHolder(holder: AdapterDetailListTableAdmin.Viewholder, position: Int) {
-
+        val item=items[position]
+        holder.numberTable.text=item._NoPesanan
+        holder.tvTanggal.text=item._DatePemesanan
+        holder.status.text=item._Status
     }
 
     override fun getItemCount(): Int {
