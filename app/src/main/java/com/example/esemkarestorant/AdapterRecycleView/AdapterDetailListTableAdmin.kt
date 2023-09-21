@@ -1,11 +1,13 @@
 package com.example.esemkarestorant.AdapterRecycleView
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.esemkarestorant.ItemData.ItemDetailTable
 import com.example.esemkarestorant.R
@@ -16,6 +18,7 @@ class AdapterDetailListTableAdmin(val context: Context,val items:List<ItemDetail
         val numberTable:TextView=view.findViewById(R.id.tvnumberTable)
         val tvTanggal:TextView=view.findViewById(R.id.tvTanggalTable)
         val status:TextView=view.findViewById(R.id.tvStatus)
+        val rvPesananAdmin: RecyclerView = view.findViewById(R.id.recyleViewTotalCart)
     }
 
     override fun onCreateViewHolder(
@@ -30,6 +33,10 @@ class AdapterDetailListTableAdmin(val context: Context,val items:List<ItemDetail
         holder.numberTable.text=item._NoPesanan
         holder.tvTanggal.text=item._DatePemesanan
         holder.status.text=item._Status
+        val adapterPesananAdmin = AdapterListPesananAdmin(context, item._ListItemPesanan)
+        Log.e("listPesananAdapter", item._ListItemPesanan.toString())
+        holder.rvPesananAdmin.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        holder.rvPesananAdmin.adapter = adapterPesananAdmin
     }
 
     override fun getItemCount(): Int {

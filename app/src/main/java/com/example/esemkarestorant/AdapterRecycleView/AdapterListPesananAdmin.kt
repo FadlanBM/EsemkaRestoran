@@ -1,6 +1,7 @@
 package com.example.esemkarestorant.AdapterRecycleView
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ class AdapterListPesananAdmin(val context: Context,val item:List<ItemListPesanan
 
     override fun onBindViewHolder(holder: AdapterListPesananAdmin.ViewHolder, position: Int) {
        val items=item[position]
+        Log.e("List pesanan admin", item.toString())
         holder.namePesanan.text=items._NameProduk
         holder.pricePesanan.text=items._Price
         holder.count.text=items._Count

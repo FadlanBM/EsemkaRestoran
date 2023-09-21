@@ -34,9 +34,6 @@ class DetailTableActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding=ActivityDetailTableBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        recyclerViewListPesanan=findViewById(R.id.recyleViewTotalCart)
-        listPesananAdapter=AdapterListPesananAdmin(this, emptyList())
-        recyclerViewListPesanan.adapter=listPesananAdapter
         recyclerView=binding.recyleView
         adapterDetailTable=AdapterDetailListTableAdmin(this, emptyList())
         recyclerView.adapter=adapterDetailTable
@@ -82,32 +79,39 @@ class DetailTableActivity : AppCompatActivity() {
             var ListPesanan= mutableListOf<ItemListPesanan>()
             val noTable=jsonObjectDetail.getString("number")
             val codeTable=jsonObjectDetail.getString("code")
+            var orderId = ""
+            var datePemesanan = ""
+            var status= ""
             binding.tvNoTable.text="Table ${noTable}"
             binding.tvCode.text=codeTable.toString()
-            Log.e("data 1",jsonObjectDetail.toString())
+            /*Log.e("data 1",jsonObjectDetail.toString())*/
             val order = jsonObjectDetail.getJSONArray("orders")
             for (i in 0 until order.length()) {
                 val resultorder = order.getJSONObject(i)
-                Log.e("data 2",resultorder.toString())
-                val orderId=resultorder.getString("orderId")
-                val datePemesanan=resultorder.getString("createdAt")
-                val status=resultorder.getString("status")
-                datalist.add(ItemDetailTable(orderId,num++.toString(),datePemesanan,status))
+                /*Log.e("data 2",resultorder.toString())*/
+                orderId=resultorder.getString("orderId")
+                datePemesanan=resultorder.getString("createdAt")
+                status=resultorder.getString("status")
                 val orderDetails= resultorder.getJSONArray("orderDetails")
                 for (j in 0 until orderDetails.length()) {
                     val resultorderDetails= orderDetails.getJSONObject(j)
-                    Log.e("data 3",resultorderDetails.toString())
-                    val menu= resultorderDetails.getJSONObject("menu")
+                    /*Log.e("data 3",resultorderDetails.toString())*/
                     val count=resultorderDetails.getString("quantity")
+                    val menu= resultorderDetails.getJSONObject("menu")
+                    Log.e("data 3",menu.toString())
+
                     val name=menu.getString("name")
-                    val price=resultorderDetails.getString("subTotal")
+                    /*val price=resultorderDetails.getString("subTotal")*/
+                    val price=menu.getString("price")
                     ListPesanan.add(ItemListPesanan(count,name,price))
+                    Log.e("ListPesanan", ListPesanan.toString())
+
                 }
+                datalist.add(ItemDetailTable(orderId,num++.toString(),datePemesanan,status,ListPesanan))
             }
             val adapter=AdapterDetailListTableAdmin(context,datalist)
+            Log.e("dataList", datalist.toString())
             recyclerView.adapter=adapter
-            val adapterlistPesanan=AdapterListPesananAdmin(context,ListPesanan)
-            recyclerViewListPesanan.adapter=adapterlistPesanan
         }
     }
 }
