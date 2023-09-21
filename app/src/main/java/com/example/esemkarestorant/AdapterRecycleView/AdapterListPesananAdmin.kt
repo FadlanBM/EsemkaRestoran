@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.esemkarestorant.ItemData.ItemListPesanan
 import com.example.esemkarestorant.R
 
-class AdapterListPesananAdmin(val context: Context,val item:List<ItemListPesanan>):RecyclerView.Adapter<AdapterListPesananAdmin.ViewHolder>() {
+class AdapterListPesananAdmin(val context: Context,val item:List<ItemListPesanan>,val potitions:Int):RecyclerView.Adapter<AdapterListPesananAdmin.ViewHolder>() {
     class ViewHolder(view:View):RecyclerView.ViewHolder(view) {
         val namePesanan:TextView=view.findViewById(R.id.tvNamePesanan)
         val pricePesanan:TextView=view.findViewById(R.id.tvpricePesanan)
@@ -25,7 +25,7 @@ class AdapterListPesananAdmin(val context: Context,val item:List<ItemListPesanan
     }
 
     override fun onBindViewHolder(holder: AdapterListPesananAdmin.ViewHolder, position: Int) {
-       val items=item[position]
+       val items=item[potitions]
         Log.e("List pesanan admin", item.toString())
         holder.namePesanan.text=items._NameProduk
         holder.pricePesanan.text=items._Price

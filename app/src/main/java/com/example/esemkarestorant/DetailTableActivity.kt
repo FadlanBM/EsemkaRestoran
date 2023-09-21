@@ -76,19 +76,22 @@ class DetailTableActivity : AppCompatActivity() {
             // Parse JSON string to JSONObject
             var datalist= mutableListOf<ItemDetailTable>()
             val jsonObjectDetail = JSONObject(result)
-            var ListPesanan= mutableListOf<ItemListPesanan>()
             val noTable=jsonObjectDetail.getString("number")
             val codeTable=jsonObjectDetail.getString("code")
             var orderId = ""
             var datePemesanan = ""
             var status= ""
+            var count=""
+            var name=""
+            var price=""
             binding.tvNoTable.text="Table ${noTable}"
             binding.tvCode.text=codeTable.toString()
             /*Log.e("data 1",jsonObjectDetail.toString())*/
             val order = jsonObjectDetail.getJSONArray("orders")
             for (i in 0 until order.length()) {
+                var ListPesanan= mutableListOf<ItemListPesanan>()
                 val resultorder = order.getJSONObject(i)
-                /*Log.e("data 2",resultorder.toString())*/
+                Log.e("data 2",resultorder.toString())
                 orderId=resultorder.getString("orderId")
                 datePemesanan=resultorder.getString("createdAt")
                 status=resultorder.getString("status")
@@ -96,17 +99,15 @@ class DetailTableActivity : AppCompatActivity() {
                 for (j in 0 until orderDetails.length()) {
                     val resultorderDetails= orderDetails.getJSONObject(j)
                     /*Log.e("data 3",resultorderDetails.toString())*/
-                    val count=resultorderDetails.getString("quantity")
+                    count=resultorderDetails.getString("quantity")
                     val menu= resultorderDetails.getJSONObject("menu")
                     Log.e("data 3",menu.toString())
-
-                    val name=menu.getString("name")
+                    name=menu.getString("name")
                     /*val price=resultorderDetails.getString("subTotal")*/
-                    val price=menu.getString("price")
+                    price=menu.getString("price")
                     ListPesanan.add(ItemListPesanan(count,name,price))
-                    Log.e("ListPesanan", ListPesanan.toString())
-
                 }
+                Log.e("ListPesanan", ListPesanan.toString())
                 datalist.add(ItemDetailTable(orderId,num++.toString(),datePemesanan,status,ListPesanan))
             }
             val adapter=AdapterDetailListTableAdmin(context,datalist)

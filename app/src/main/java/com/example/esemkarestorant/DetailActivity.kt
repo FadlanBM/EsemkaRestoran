@@ -63,7 +63,6 @@ class DetailActivity : AppCompatActivity() {
         }
         binding.btnAddToCart.setOnClickListener {
             val listId = listOf(id!!)
-            SharePreft.getIntance(this).saveidcart("idCarts", listId)
             val list= listOf(id)
             SharePreft_Char(this).saveData(id!!)
 

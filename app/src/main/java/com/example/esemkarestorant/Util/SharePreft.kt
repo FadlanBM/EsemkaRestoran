@@ -28,13 +28,4 @@ class SharePreft constructor(context: Context) {
     fun getToken():String?{
         return sharePreft.getString(preftToken,null)
     }
-
-
-    fun saveidcart(key: String, list: List<String>) {
-        val joinedList = list.joinToString(separator = "|") // Use any separator you prefer
-        sharePreft.edit().putString(key, joinedList).apply()
-    }
-
-
-
 }

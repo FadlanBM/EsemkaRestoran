@@ -3,11 +3,14 @@ package com.example.esemkarestorant
 import android.R
 import android.app.Dialog
 import android.content.Context
+import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +30,8 @@ class MainListTableAdminActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainListTableAdminBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var itemAdapter:AdpaterListTable
+    private lateinit var drawable:Drawable
+    private lateinit var progressBar: ProgressBar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMainListTableAdminBinding.inflate(layoutInflater)
@@ -34,7 +39,14 @@ class MainListTableAdminActivity : AppCompatActivity() {
         recyclerView=binding.ryListTabelAdmin
         itemAdapter=AdpaterListTable(this, emptyList())
         recyclerView.adapter=itemAdapter
+
+        progressBar=binding.progresBar
+        drawable=progressBar.indeterminateDrawable
+        drawable.setColorFilter(resources.getColor(com.example.esemkarestorant.R.color.black),PorterDuff.Mode.SRC_IN)
+        progressBar.indeterminateDrawable=drawable
         getDataTable(this).execute()
+
+
 
         binding.btnAddTableAdmin.setOnClickListener {
             val dialog = Dialog(this)

@@ -33,9 +33,10 @@ class AdapterDetailListTableAdmin(val context: Context,val items:List<ItemDetail
         holder.numberTable.text=item._NoPesanan
         holder.tvTanggal.text=item._DatePemesanan
         holder.status.text=item._Status
-        val adapterPesananAdmin = AdapterListPesananAdmin(context, item._ListItemPesanan)
+        val adapterPesananAdmin = AdapterListPesananAdmin(context, item._ListItemPesanan,position)
         Log.e("listPesananAdapter", item._ListItemPesanan.toString())
         holder.rvPesananAdmin.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
         holder.rvPesananAdmin.adapter = adapterPesananAdmin
     }
 

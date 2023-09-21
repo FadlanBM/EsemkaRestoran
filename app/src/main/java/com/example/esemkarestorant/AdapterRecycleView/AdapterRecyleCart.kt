@@ -61,6 +61,9 @@ class AdapterRecyleCart(val context: Context,val items:List<ItemListcart>,val li
             holder.count.text=item.count
             holder.btnMinus.isEnabled = item.count != "0"
         }
+        holder.btnRemove.setOnClickListener {
+            SharePreft_Char(context).deleteDataCount(position)
+        }
 
     }
     override fun getItemCount(): Int {
@@ -73,7 +76,7 @@ class AdapterRecyleCart(val context: Context,val items:List<ItemListcart>,val li
         var count:TextView=view.findViewById(R.id.lb_count_produk)
         val btnAdd:Button=view.findViewById(R.id.btn_cart_plus)
         val btnMinus:Button=view.findViewById(R.id.btn_cart_min)
-
+        val btnRemove:Button=view.findViewById(R.id.btn_cart_delete)
     }
     fun addCount(potition:Int){
         val oldValue=SharePreft_Char(context).getDataCount()[potition].toInt()
